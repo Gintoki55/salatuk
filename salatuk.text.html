@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salatuk</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cairo:wght@200..1000&family=Lato&family=Montserrat:wght@500&family=Poppins:ital,wght@0,400;0,500;1,400&family=Roboto&display=swap" rel="stylesheet">
+    <!-- ////////////////icons\\\\\\\\\\\\\\\ -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Cairo';
+    }
+    body{
+        width: 100%;
+        height: 100vh;
+        background:url(images/masjid2.jpg);
+        background-position: center;
+        background-size: cover;
+    }
+    .center{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .header{
+        width: 100%;
+        height: 60%;
+        background-color: rgba(98, 97, 97, 0.2);
+        position: relative;
+    }
+    .footer{
+        width: 100%;
+        height: 40%;
+        background-color: rgba(98, 97, 97, 0.655);
+        backdrop-filter: blur(2px);
+        transition: .6s;
+    }
+
+    .footer::after{
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 5px;
+        background:linear-gradient(90deg ,transparent, rgb(255, 253, 253), transparent);
+        top: 0;
+        animation: animate 10s infinite alternate;
+    };
+
+    @keyframes animate{
+        from {
+            transform: translateX(-100%);
+        }
+        to{
+            transform: translateX(0);
+        }
+
+    }
+    
+    
+    .date-container{
+        width: 70%;
+        height: 30px;
+        margin: 0 auto;
+        /* background-color: antiquewhite; */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: absolute;
+        left: 200px;
+        top: 230px;
+    }
+
+    select{
+        border: none;
+        outline: none;
+        width: 200px;
+        padding-right:10px;
+        font-size: 19px;
+    }
+
+    h1::before{
+        content: '🕌📿';
+    }
+
+    span{
+        vertical-align: middle;
+    }
+    .ishas{
+        background-color: #b1adad;
+    }
+    .day{
+        background-color: #fff;
+        padding: 5px 8px;
+        font-size: 17px;
+    }
+    .middle{
+        width: 100%;
+        height: 100px;
+        color: #fff;
+        font-size: 22px;
+    }
+    .center-date{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center; 
+    }
+
+</style>
+<body>
+  <div class="center">
+
+    <div class="header">
+        <h1 style="text-align: center;  margin-top: 30px;font-size: 50px;">مواقيت الصلاة</h1>
+        <h3 style="text-align: center; margin-top: 30px; font-family:'Alexandria';">﴾وَاسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ وَإِنَّهَا لَكَبِيرَةٌ إِلَّا عَلَى الْخَاشِعِينَ﴿</h3>
+        <div class="center-date">
+            <div class="date-container">
+
+                <div class="day">
+                    <div style="direction: rtl;">تاريخ اليوم :<span id="date-now"></span></div>
+                </div>
+
+                <select style="direction: rtl;" class="selectCountrty" onchange="clickBtn()">
+                    <option disabled selected value >اختر مدينتك :</option>
+                </select>
+
+            </div>
+            <div class="middle" style="text-align: center;display: flex; align-items: center; flex-direction: column; justify-content: center; position: absolute; bottom: 0px;">
+                <h3 id="day-now">يوم الاثنين</h3>
+                <h4 style="direction: rtl;">الوقت المتبقي :<span id="remainingTime">3:00</span></h4>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="footer">
+        <p style="direction: rtl; font-size: 30px; margin-right: 20px; font-weight: bolder;color: #fff; margin-bottom: -10px; margin-top: 10px;">مواقيت الآذان في المدينة <span class="city">عمان</span></p>
+        <table  style="background-color: white; direction: rtl; width: 90%; text-align: center; margin: 0 auto; position: relative; top: 60px;;">
+            <tr style="background-color: #eee; height: 70px;">
+                <th class="fajar">الفجر <span class="material-symbols-outlined">dark_mode</span></th>
+                <th class="sharoq">الشروق <span class="material-symbols-outlined">wb_twilight</span></th>
+                <th class="dhoor">الظهر <span class="material-symbols-outlined">sunny</span></th>
+                <th class="asar">العصر <span class="material-symbols-outlined">sunny</span></th>
+                <th class="maqrab">المغرب <span class="material-symbols-outlined">dark_mode</span></th>
+                <th class="isha">العشاء <span class="material-symbols-outlined">nights_stay</span></th>
+            </tr>
+            <tr style="background-color: white; height: 70px;" class="prayerTime">
+                <!-- <td>5:28 AM</td>
+                <td>6:45 PM</td>
+                <td>12:28 AM</td>
+                <td>3:28 PM</td>
+                <td class="ishas">6:28 PM</td>
+                <td>8:00 PM</td> -->
+            </tr>
+        </table>
+    </div>
+
+  </div>
+</body>
+
+<script>
+    let countrys = [
+        {
+            "name":"oman",
+        },
+        {
+            "name":"iran",
+        },
+        {
+            "name":"Lebanon",
+        },
+        {
+            "name":"qatar",
+        },
+        {
+            "name":"yemen",
+        },
+    ]
+        let index = 0
+        for (const city of countrys){
+            fetch(`http://api.aladhan.com/v1/calendarByCity/2024/2?city=${city.name}&country=&method=4`)
+            .then(Response => Response.json())
+            .then(information => {
+                console.log(information)
+                const names = information.data
+                
+                index++
+                for (const name of names) {
+                    // console.log(name.date.readable); // Example: Log the readable date
+                    console.log(name.meta.timezone); // Log prayer times for the day
+                    let option = document.createElement('option')
+                    // index++
+                    option.value = index
+                    let content = ` <option>${name.meta.timezone}</option>`
+                    option.innerHTML = content
+                    selectCountrty.appendChild(option)
+                    let contents  = `<td>${name.timings.Asr}</td>`
+                    console.log(name.timings.Asr)
+                    let td = document.createElement('td')
+                    td.innerHTML = contents
+                    box.appendChild(td)
+                    console.log(name.timings)
+                    break
+                }
+        
+                
+            })
+
+            let box = document.querySelector('.prayerTime');
+            function clickBtn(){
+                let x = selectCountrty.value;
+                alert(x)
+                let content  = `<td>6:45 PM</td>`
+                let td = document.createElement('td')
+                td.innerHTML = content
+                box.appendChild(td)
+                console.log(name.timings)
+            }
+        }
+       
+
+
+
+    let selectCountrty = document.querySelector('.selectCountrty')
+    let now = new Date()
+    console.log(now)
+    document.getElementById('date-now').innerHTML = now
+    
+   
+    
+</script>
+
+
+
+
+
+
+</html>
+
+
+
+
+
+
+problems :
+
+1- I can't get the country name 
+2- which is i can't display anything
+3- if I displayed how Iknow this day is the one i wanted

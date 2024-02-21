@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salatuk</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cairo:wght@200..1000&family=Lato&family=Montserrat:wght@500&family=Poppins:ital,wght@0,400;0,500;1,400&family=Roboto&display=swap" rel="stylesheet">
+    <!-- ////////////////icons\\\\\\\\\\\\\\\ -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="node_modules/axios/dist/axios.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js"></script>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Cairo';
+    }
+    body{
+        width: 100%;
+        height: 100vh;
+        max-height: 120vh;
+        background:url(images/masjid2.jpg);
+        background-position: center;
+        background-size: cover;
+    }
+    .center{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .header{
+        width: 100%;
+        height: 60%;
+        background-color: rgba(98, 97, 97, 0.2);
+        position: relative;
+    }
+
+    h1{
+        text-align: center;
+        margin-top: 30px;
+        font-size: 50px;
+    }
+
+    h3{
+        text-align: center;
+        margin-top: 30px;
+        font-family:'Alexandria';
+    }
+    .footer{
+        width: 100%;
+        height: 40%;
+        background-color: rgba(37, 36, 36, 0.655);
+        backdrop-filter: blur(2px);
+        transition: .6s;
+    }
+
+  
+    .date-container{
+        width: 70%;
+        height: 30px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        top: 60px;
+    }
+
+    select{
+        border: none;
+        outline: none;
+        width: 200px;
+        padding-right:10px;
+        font-size: 19px;
+    }
+
+    h1::before{
+        content: '🕌📿';
+    }
+
+    span{
+        vertical-align: middle;
+    }
+    
+    .day{
+        background-color: #fff;
+        padding: 5px 8px;
+        font-size: 17px;
+    }
+    .middle{
+        width: 100%;
+        height: 100px;
+        color: #fff;
+        font-size: 22px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        position: absolute;
+        bottom: 0px;
+    }
+    .center-date{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center; 
+    }
+    td{
+        font-size: 20px;
+    }
+    hr::after{
+        content: '';
+        width: 100%;
+        height: 8px;
+        position: absolute;
+        background:linear-gradient(90deg ,transparent, rgb(255, 253, 253), transparent);
+        top: 0;
+        animation: animate 10s infinite alternate;
+    }
+
+    @keyframes animate{
+        from {
+            transform: translateX(-100%);
+        }
+
+        to{
+            transform: translateX(0);
+        }
+    }
+
+    #day-now{
+        font-size: 50px;
+        direction: rtl;
+    }
+    #pargraph{
+        direction: rtl;
+        font-size: 30px;
+        margin-right: 20px; font-weight: bolder;color: #fff; margin-bottom: -10px; margin-top: 10px;
+    }
+
+    table{
+        background-color: white;
+        direction: rtl;
+        width: 90%;
+        text-align: center;
+        margin: 0 auto;
+        position: relative;
+        top: 70px;
+    }
+    .tr-header{
+        background-color: #d3d3d3;
+        height: 70px
+    }
+    .prayerTime{
+        background-color: white;
+        height: 70px;
+    }
+    /* ?///////////////// response design \\\\\\\\\\\\\\\\\\\ */
+    @media screen and (max-width: 600px) {
+        body{
+            background:url(images/masjid3.jpg);
+            background-position: center;
+            background-size: cover;
+        }
+
+        h1{
+            font-size: 20px;
+        }
+        h3{
+            font-size: 10px;
+            color: rgb(226, 220, 213);
+        }
+        .date-container{
+            inset: 0;
+            flex-direction: column;
+            gap:10px;
+            top: 25px;
+        }
+        .day{
+            border-radius: 20px;
+            background: none;
+            font-weight: bolder;
+        }
+        #day-now{
+            font-size: 14px;
+            direction: rtl;
+            
+        }
+        select{
+            font-size: 13px;
+            border-radius: 20px;
+            background-color: transparent;
+            outline:auto;
+            width: 120px;
+        }
+        table{
+            top: 30px;
+        }
+        .tr-header{
+            height: 30px;
+        }
+        .tr-header *{
+            font-size: 12px;
+        }
+        .prayerTime{
+            height: 30px;
+        }
+        .prayerTime *{
+           font-size: 12px;
+        }
+        #pargraph{
+            font-size: 10px;
+        }
+        .middle{
+            bottom: -20px;
+        }
+    }
+
+    
+</style>
+<body>
+  <div class="center">
+
+    <div class="header">
+        <h1>مواقيت الصلاة</h1>
+        <h3>﴾وَاسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ وَإِنَّهَا لَكَبِيرَةٌ إِلَّا عَلَى الْخَاشِعِينَ﴿</h3>
+        <div class="center-date">
+            <div class="date-container">
+
+                <div class="day">
+                    <div style="direction: rtl;">تاريخ اليوم :<span id="date-now"></span></div>
+                </div>
+
+                <select style="direction: rtl;" class="selectCountrty" onchange="selected()">
+                    <!-- <option disabled selected value >اختر مدينتك :</option> -->
+                </select>
+
+            </div>
+
+
+
+            <div class="middle">
+                <h3 id="day-now"></h3>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="footer">
+        <hr style="width: 0;">
+        <p id="pargraph">مواقيت الآذان في المدينة <span id="city">ظفار</span></p>
+
+        <table>
+            <tr class="tr-header">
+                <th class="fajar">الفجر <span class="material-symbols-outlined">dark_mode</span></th>
+                <th class="sharoq">الشروق <span class="material-symbols-outlined">wb_twilight</span></th>
+                <th class="dhoor">الظهر <span class="material-symbols-outlined">sunny</span></th>
+                <th class="asar">العصر <span class="material-symbols-outlined">sunny</span></th>
+                <th class="maqrab">المغرب <span class="material-symbols-outlined">dark_mode</span></th>
+                <th class="isha">العشاء <span class="material-symbols-outlined">nights_stay</span></th>
+            </tr>
+            <tr class="prayerTime">
+                <td id="Fajr"></td>
+                <td id="Sunrise"></td>
+                <td id="Dhuhr"></td>
+                <td id="Asr"></td>
+                <td id="Maghrib"></td>
+                <td id="Isha"></td>
+            </tr>
+        </table>
+    </div>
+
+  </div>
+</body>
+
+<script>
+   const  cities = [
+        {
+            "name":"ظفار",
+            "key":"dhofar",
+        },
+        {
+            "name":"البريمي",
+            "key":"Al Buraymī",
+        },
+        {
+            "name":"مسقط",
+            "key":"Masqaţ",
+        },
+        {
+            "name":"الوسطى",
+            "key":"Al Wusţá",
+        },
+        {
+            "name":"شمال الشرقيه",
+            "key":"Shamāl ash Sharqīyah",
+        },
+    ]
+    let Fajr = document.getElementById('Fajr');
+    let Sunrise = document.getElementById('Sunrise');
+    let Dhuhr = document.getElementById('Dhuhr');
+    let Asr = document.getElementById('Asr');
+    let Maghrib = document.getElementById('Maghrib');
+    let Isha = document.getElementById('Isha');
+
+    let selectCountrty = document.querySelector('.selectCountrty');
+    let date = document.getElementById('date-now');
+    let day = document.getElementById('day-now');
+    for(const city of cities){
+        let content = ` <option>${city.name}</option>`
+        let option = document.createElement('option')
+        option.innerHTML = content
+        selectCountrty.appendChild(option)
+        
+    }
+
+   
+    function selected(){
+
+       for(const city of cities){
+            
+            if(selectCountrty.value == city.name){
+                prayerciity(city.key)
+            }
+            let displayname = document.getElementById('city');
+            displayname.innerHTML = selectCountrty.value
+       }    
+    }
+    
+
+    function fillalltimeforprayer(id, time){
+        document.getElementById(id).innerHTML = time
+    }
+
+
+
+    function prayerciity(cityname){
+        fetch(`http://api.aladhan.com/v1/timingsByCity?country=OM&city=${cityname}`)
+        .then( Response => Response.json())
+        .then(data => {
+            console.log(data.data)
+            let timings = data.data.timings
+            let weekday = data.data.date.hijri.weekday.ar
+            let hijri = data.data.date.hijri.month.ar
+            let year_hijri = data.data.date.hijri.year
+            let day_hijri = data.data.date.hijri.day
+
+            date.innerHTML = data.data.date.readable+" "+ weekday
+            day.innerHTML = ""+day_hijri+" "+hijri+" "+year_hijri         
+            fillalltimeforprayer("Fajr", timings.Fajr)
+            fillalltimeforprayer("Sunrise", timings.Sunrise)
+            fillalltimeforprayer("Dhuhr", timings.Dhuhr)
+            fillalltimeforprayer("Asr", timings.Asr)
+            fillalltimeforprayer("Maghrib", timings.Maghrib)
+            fillalltimeforprayer("Isha", timings.Isha)
+        })
+    }
+
+    prayerciity("dhofar")
+    
+    
+</script>
+</html>
