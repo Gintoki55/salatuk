@@ -9,8 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cairo:wght@200..1000&family=Lato&family=Montserrat:wght@500&family=Poppins:ital,wght@0,400;0,500;1,400&family=Roboto&display=swap" rel="stylesheet">
     <!-- ////////////////icons\\\\\\\\\\\\\\\ -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <script src="node_modules/axios/dist/axios.min.js"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js"></script>
+    <script src="./node_modules/axios/dist/axios.min.js"></script>
+    
 </head>
 <style>
     *{
@@ -343,19 +343,17 @@
     }
 
 
-
     function prayerciity(cityname){
-        fetch(`http://api.aladhan.com/v1/timingsByCity?country=OM&city=${cityname}`)
-        .then( Response => Response.json())
-        .then(data => {
-            console.log(data.data)
-            let timings = data.data.timings
-            let weekday = data.data.date.hijri.weekday.ar
-            let hijri = data.data.date.hijri.month.ar
-            let year_hijri = data.data.date.hijri.year
-            let day_hijri = data.data.date.hijri.day
+        axios.get(`https://api.aladhan.com/v1/timingsByCity?country=OM&city=${cityname}`)
+        .then( response => {
+            console.log(response.data.data)
+            let timings = response.data.data.timings
+            let weekday = response.data.data.date.hijri.weekday.ar
+            let hijri = response.data.data.date.hijri.month.ar
+            let year_hijri = response.data.data.date.hijri.year
+            let day_hijri = response.data.data.date.hijri.day
 
-            date.innerHTML = data.data.date.readable+" "+ weekday
+            date.innerHTML = response.data.data.date.readable+" "+ weekday
             day.innerHTML = ""+day_hijri+" "+hijri+" "+year_hijri         
             fillalltimeforprayer("Fajr", timings.Fajr)
             fillalltimeforprayer("Sunrise", timings.Sunrise)
@@ -364,10 +362,16 @@
             fillalltimeforprayer("Maghrib", timings.Maghrib)
             fillalltimeforprayer("Isha", timings.Isha)
         })
+        .catch(error => {
+            console.error('There was an error!', error);
+        });
     }
+
 
     prayerciity("dhofar")
     
     
 </script>
+
+
 </html>
